@@ -22,6 +22,7 @@
 import ContentField from '@/components/ContentField.vue'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
+import router from '@/router'
 
 export default {
     components: {
@@ -35,7 +36,10 @@ export default {
         const login = () => {
             store.dispatch("login", {
                 username: username.value,
-                password: password.value
+                password: password.value,
+                success() {
+                    router.push({name : 'home'});
+                }
             })
         }
 

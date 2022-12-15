@@ -2,12 +2,14 @@ import $ from 'jquery'
 export default ({
     state: {
         username: "",
+        role: "",
     },
     getters: {
     },
     mutations: {
-        updateUser(state, username) {
-            state.username = username
+        updateUser(state, user) {
+            state.username = user.username
+            state.role = user.role
         }
     },
     actions: {
@@ -21,8 +23,9 @@ export default ({
                     psw: user.password,
                     role: null,
                 },
-                success() {
-                    context.commit("updateUser", user.username)
+                success(resp) {
+                    context.commit("updateUser", resp)
+                    user.success()
                 },
                 error(resp) {
                     console.log(resp)
