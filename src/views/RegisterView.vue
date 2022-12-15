@@ -49,7 +49,7 @@ export default {
         let role = ref('')
         const register = () => {
             $.ajax({
-                url: "http:127.0.0.1:3000/library/user/register",
+                url: "http://127.0.0.1:3000/library/user/register",
                 type:"post",
                 data: {
                     id: sid.value,

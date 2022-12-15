@@ -15,7 +15,7 @@ export default ({
     actions: {
         login(context, user) {
             $.ajax({
-                url:"http://127.0.0.1/library/user/login",
+                url:"http://127.0.0.1:3000/library/user/login",
                 type: "post",
                 data: {
                     name: user.username,
