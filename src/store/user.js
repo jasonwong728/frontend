@@ -8,7 +8,7 @@ export default ({
     },
     mutations: {
         updateUser(state, user) {
-            state.username = user.username
+            state.username = user.id
             state.role = user.role
         }
     },
@@ -18,10 +18,8 @@ export default ({
                 url:"http://127.0.0.1/login",
                 type: "post",
                 data: {
-                    id: null,
                     name: user.username,
                     psw: user.password,
-                    role: null,
                 },
                 success(resp) {
                     context.commit("updateUser", resp)
