@@ -4,7 +4,7 @@
             <div class="col-3">
                 <form @submit.prevent="login">
                     <div class="form-floating mb-3">
-                        <input v-model="username" type="text" class="form-control" id="floatingInput" placeholder="请输入学号">
+                        <input v-model="id" type="text" class="form-control" id="floatingInput" placeholder="请输入学号">
                         <label for="floatingInput">学号</label>
                     </div>
                     <div class="form-floating">
@@ -31,11 +31,11 @@ export default {
     setup() {
         const store = useStore()
         let error_message = ref('')
-        let username = ref('')
+        let id = ref('')
         let password = ref('')
         const login = () => {
             store.dispatch("login", {
-                username: username.value,
+                id: id.value,
                 password: password.value,
                 success() {
                     router.push({name : 'home'});
@@ -46,7 +46,7 @@ export default {
         return {
             login,
             error_message,
-            username,
+            id,
             password,
         }
     }

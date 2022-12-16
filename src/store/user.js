@@ -1,14 +1,14 @@
 import $ from 'jquery'
 export default ({
     state: {
-        username: "",
+        id: "",
         role: "",
     },
     getters: {
     },
     mutations: {
         updateUser(state, user) {
-            state.username = user.id
+            state.id = user.id
             state.role = user.role
         }
     },
@@ -20,7 +20,7 @@ export default ({
                 dataType:'json',
                 contentType:'application/json;charset=UTF-8',
                 data: JSON.stringify({
-                    name: user.username,
+                    id: user.id,
                     psw: user.password,
                 }),
                 success(resp) {
