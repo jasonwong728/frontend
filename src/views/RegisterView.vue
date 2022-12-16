@@ -49,7 +49,7 @@ export default {
         let username = ref('')
         let password = ref('')
         let role = ref('学生')
-        let error_message = ref('用户已存在')
+        let error_message = ref('')
         const register = () => {
             $.ajax({
                 url: "http://127.0.0.1:3000/library/user/register",
