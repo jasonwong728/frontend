@@ -17,10 +17,12 @@ export default ({
             $.ajax({
                 url:"http://127.0.0.1:3000/library/user/login",
                 type: "post",
-                data: {
+                dataType:'json',
+                contentType:'application/json;charset=UTF-8',
+                data: JSON.stringify({
                     name: user.username,
                     psw: user.password,
-                },
+                }),
                 success(resp) {
                     context.commit("updateUser", resp)
                     user.success()

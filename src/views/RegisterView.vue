@@ -51,12 +51,14 @@ export default {
             $.ajax({
                 url: "http://127.0.0.1:3000/library/user/register",
                 type:"post",
-                data: {
+                dataType:'json',
+                contentType:'application/json;charset=UTF-8',
+                data: JSON.stringify({
                     id: sid.value,
                     name: username.value,
                     psw: password.value,
                     role: role.value
-                },
+                }),
                 success(resp) {
                     console.log(resp)
                 },
