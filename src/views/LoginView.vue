@@ -11,7 +11,7 @@
                         <input v-model="password" type="password" class="form-control" id="floatingPassword" placeholder="请输入密码">
                         <label for="floatingPassword">密码</label>
                     </div>
-                    <button type="button" class="btn btn-primary">登录</button>
+                    <button type="submit" class="btn btn-primary">登录</button>
                 </form>
             </div>
         </div>
