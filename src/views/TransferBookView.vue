@@ -84,6 +84,7 @@ export default {
                 url: "http://127.0.0.1:3000/library/book/getBooksToChangeStatus",
                 type: "get",
                 success(resp) {
+                    console.log(resp)
                     borrowed_books.value = resp
                 },
                 error(resp) {
