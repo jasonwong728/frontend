@@ -5,6 +5,7 @@ import UserInfoView from '@/views/Stu/UserInfoView.vue'
 import BookListView from '@/views/BookListView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import BorrowView from '@/views/BorrowView.vue'
+import TransferBookView from '@/views/TransferBookView.vue'
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/user/info',
     name: 'user_info_view',
     component: UserInfoView
+  },
+  {
+    path: '/transefer',
+    name: 'transfer_book_view',
+    component: TransferBookView
   },
   {
     path: '/404',

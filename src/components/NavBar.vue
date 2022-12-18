@@ -7,12 +7,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="$store.state.user.role === '学生'">
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{name : 'home'}" v-if="$store.state.user.role === '学生'">书籍借阅</router-link>
+                        <router-link class="nav-link" :to="{name : 'home'}">书籍借阅</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{name : 'borrow_view'}" v-if="$store.state.user.role === '学生'">我的借阅</router-link>
+                        <router-link class="nav-link" :to="{name : 'borrow_view'}">我的借阅</router-link>
+                    </li>
+                </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="$store.state.user.role === '管理'">
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name : 'home'}">书籍管理</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name : 'transfer_book_view'}">调库申请</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav" v-if="$store.state.user.is_login === true">
@@ -33,7 +41,7 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="navbar-nav" v-else>
+                <ul class="navbar-nav" v-if="$store.state.user.is_login === false">
                     <router-link class="nav-link" :to="{ name: 'login_view' }">
                         登录
                     </router-link>
