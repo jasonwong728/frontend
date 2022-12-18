@@ -1,8 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import UserInfoView from '@/views/Stu/UserInfoView.vue'
+import BookListView from '@/views/BookListView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
+import BorrowView from '@/views/BorrowView.vue'
 
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: BookListView
+  },
   {
     path: '/login',
     name: 'login_view',
@@ -13,6 +22,25 @@ const routes = [
     name: 'register_view',
     component: RegisterView
   },
+  {
+    path: '/borrow',
+    name: 'borrow_view',
+    component: BorrowView
+  },
+  {
+    path: '/user/info',
+    name: 'user_info_view',
+    component: UserInfoView
+  },
+  {
+    path: '/404',
+    name: 'not_found_view',
+    component: NotFoundView
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404'
+  }
 ]
 
 const router = createRouter({

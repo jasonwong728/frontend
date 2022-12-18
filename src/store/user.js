@@ -1,15 +1,25 @@
 import $ from 'jquery'
 export default ({
     state: {
-        id: "",
-        role: "",
+        id: "2019050610",
+        username: "饭好香",
+        role: "学生",
+        is_login : true
     },
     getters: {
     },
     mutations: {
         updateUser(state, user) {
             state.id = user.id
+            state.username = user.username
             state.role = user.role
+            state.is_login = true
+        },
+        logout(state) {
+            state.id = ""
+            state.username = ""
+            state.role = ""
+            state.is_login = false
         }
     },
     actions: {
@@ -31,6 +41,9 @@ export default ({
                     console.log(resp)
                 }
             })
+        },
+        logout(context) {
+            context.commit("logout")
         }
     },
     modules: {

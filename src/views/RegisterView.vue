@@ -17,13 +17,11 @@
                             placeholder="请输入密码">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="test">角色</label>
-                        <input v-model="role" type="text" class="form-control" list="test" id="test2"
-                            onfocus="this.value=''">
-                        <datalist id="test">
-                            <option value="学生">学生</option>
-                            <option value="管理员">管理员</option>
-                        </datalist>
+                        <label class="form-label" for="Select">角色</label>
+                        <select id="Select" class="form-select">
+                            <option>学生</option>
+                            <option>管理员</option>
+                        </select>
                     </div>
                     <div class="error_message">{{ error_message }}</div>
                     <button type="submit" class="btn btn-primary">注册</button>
