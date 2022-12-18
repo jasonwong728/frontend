@@ -25,8 +25,8 @@
                     <td>{{ book.required_status }}</td>
                     <td>{{ book.status }}</td>
                     <td>
-                        <button type="button" class="btn btn-success" style="margin-right:10px" @click="agreeOrNot(book.ISBN, 'yes')">同意</button>
-                        <button type="button" class="btn btn-warning" @click="agreeOrNot(book.ISBN, 'no')">不同意</button>
+                        <button type="button" class="btn btn-success" style="margin-right:10px" @click="agreeOrNot(book.isbn, 'yes')">同意</button>
+                        <button type="button" class="btn btn-warning" @click="agreeOrNot(book.isbn, 'no')">不同意</button>
                     </td>
                     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
                         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
@@ -60,14 +60,14 @@ export default {
         let t = [{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":7,"price":10.0,"publisher":"少年文艺出版社","required_status":"去往_南校区","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"原来不只有天才","number":5,"price":11.0,"publisher":"嘉然解馋出版社","required_status":"去往_南校区","status":"珠海"}]
         borrowed_books.value = t
 
-        const agreeOrNot = (ISBN, decision) => {
+        const agreeOrNot = (isbn, decision) => {
             $.ajax({
                 url: "http://127.0.0.1:3000/library/book/manageChangeRequiredStatus",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
                 data: JSON.stringify({
-                    isbn: ISBN,
+                    isbn,
                     decision,
                 }),
                 success(resp) {
