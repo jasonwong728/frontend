@@ -158,6 +158,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+                            <div id="liveToast-modify" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto">图书馆</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    修改成功
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -253,7 +264,7 @@ export default {
         }
 
         const transferBook = ISBN => {
-            new Toast(document.querySelector('.toast')).show()
+            new Toast(document.querySelector('#liveToast')).show()
             $.ajax({
                 url: "http://127.0.0.1:3000/library/book/changeBookRequiredStatus",
                 type: "post",
@@ -309,6 +320,7 @@ export default {
                     status: status.value,
                 }),
                 success() {
+                    new Toast(document.querySelector('#liveToast-modify')).show()
                     pull_page(current_page)
                 },
                 error(resp) {

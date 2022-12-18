@@ -3,7 +3,7 @@ export default ({
     state: {
         id: "2019050610",
         username: "饭好香",
-        role: "学生",
+        role: "管理",
         is_login : true
     },
     getters: {
