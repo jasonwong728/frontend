@@ -82,7 +82,7 @@
                     <td>{{ book.number }}</td>
                     <td>{{ book.status }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" id="liveToastBtn" @click="transferBook(book.isbn)" v-if="book.status !== '本部' && $store.state.user.role === '学生'">调库</button>
+                        <button type="button" class="btn btn-warning" id="liveToastBtn" @click="transferBook(book.isbn)" v-if="book.status === '本部' && $store.state.user.role === '学生'">调库</button>
                         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
                             <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="toast-header">
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" @click="borrow(book.isbn)" v-if="book.status === '本部' && $store.state.user.role === '学生'">借阅</button>
+                        <button type="button" class="btn btn-primary" @click="borrow(book.isbn)" v-if="book.status !== '本部' && $store.state.user.role === '学生'">借阅</button>
                         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
                             <div id="liveToast-borrow" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="toast-header">
