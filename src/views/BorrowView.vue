@@ -82,7 +82,7 @@ export default {
                 }),
                 success(resp) {
                     console.log(resp)
-                    getBorrowedBooks()
+                    // getBorrowedBooks()
                 },
                 error(resp) {
                     console.log(resp)
