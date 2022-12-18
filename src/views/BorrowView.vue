@@ -69,7 +69,6 @@ export default {
         }
 
         const return_book = ISBN => {
-            new Toast(document.querySelector('#liveToast')).show()
             $.ajax({
                 url: "http://127.0.0.1:3000/library/book/return",
                 type: "post",
@@ -82,7 +81,8 @@ export default {
                 }),
                 success(resp) {
                     console.log(resp)
-                    // getBorrowedBooks()
+                    getBorrowedBooks()
+                    new Toast(document.querySelector('#liveToast')).show()
                 },
                 error(resp) {
                     console.log(resp)
