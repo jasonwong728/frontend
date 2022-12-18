@@ -82,7 +82,7 @@
                     <td>{{ book.number }}</td>
                     <td>{{ book.status }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" id="liveToastBtn" @click="transferBook(book.isbn)" v-if="book.status === '南校区' && $store.state.user.role === '学生'">调库</button>
+                        <button type="button" class="btn btn-warning" id="liveToastBtn" @click="transferBook(book.isbn)" v-if="book.status !== '本部' && $store.state.user.role === '学生'">调库</button>
                         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
                             <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="toast-header">
@@ -214,6 +214,9 @@ export default {
             //     status: "本部"
             // }
         ])
+        let pages_show = ref([])
+        // const t = {"data":[{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":6,"price":10.0,"publisher":"少年文艺出版社","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"蔡志浩的桌艾日记","number":5,"price":11.0,"publisher":"嘉然解馋出版社","status":"南校"},{"author":"蔡志浩","category":"科幻","isbn":"105123154","name":"王欣蕊的星唉日记","number":0,"price":115.0,"publisher":"暨南大学出版社","status":"本部"},{"author":"莫言","category":"小说","isbn":"20000","name":"师傅越来越幽默","number":19,"price":104.0,"publisher":"人民出版社","status":"本部"}],"len":4}
+        // books_show.value = t.data
         const store = useStore()
 
         const borrow = ISBN => {
@@ -361,7 +364,7 @@ export default {
                     })
                 }
             }
-            books_show.value = pages_should_show
+            pages_show.value = pages_should_show
         }
 
         const pull_page = page => {
@@ -400,6 +403,7 @@ export default {
             number,
             status,
             books_show,
+            pages_show,
             click_page,
             search,
             update_books,
