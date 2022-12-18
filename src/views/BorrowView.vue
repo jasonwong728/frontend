@@ -21,6 +21,17 @@
                     <td>
                         <button type="button" class="btn btn-warning" @click="return_book(book.ISBN)">还书</button>
                     </td>
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+                        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="me-auto">图书馆</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                已还书
+                            </div>
+                        </div>
+                    </div>
                 </tr>
             </tbody>
         </table>
@@ -32,6 +43,7 @@ import ContentField from '@/components/ContentField.vue'
 import { ref } from 'vue';
 import $ from 'jquery'
 import { useStore } from 'vuex';
+import { Toast } from 'bootstrap';
 
 export default {
     components: {
@@ -68,6 +80,7 @@ export default {
                     status: "本部"
                 }),
                 success(resp) {
+                    new Toast(document.querySelector('#liveToast')).show()
                     console.log(resp)
                     getBorrowedBooks()
                 },
@@ -79,7 +92,7 @@ export default {
 
         const getBorrowedBooks = () => {
             $.ajax({
-                url: "http://127.0.0.1:3000/library/book/getBorrowedBooks",
+                url: "http://127.0.0.1:3000/library/user/getBorrowedBooks",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
