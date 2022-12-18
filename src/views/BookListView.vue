@@ -108,7 +108,7 @@
                         </div>
                         <button type="button" class="btn btn-warning" style="margin-right:10px" @click="showBorrow(book.isbn)" data-bs-toggle="modal" data-bs-target="#borrowed-book" v-if="$store.state.user.role === '管理'">查看借阅</button>
                         <div class="modal fade" id="borrowed-book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">借阅记录</h5>
@@ -320,6 +320,13 @@ export default {
             })
         }
 
+        const process_time = data => {
+            for(let i = 0;i < data.length;i ++) {
+                data[i].borrow_date = new Date(data[i].borrow_date)
+                data[i].return_date = new Date(data[i].return_date)
+            }
+        }
+
         const books_borrowed = ref([])
         const showBorrow = isbn => {
             $.ajax({
@@ -332,6 +339,7 @@ export default {
                 }),
                 success(resp) {
                     console.log(resp)
+                    process_time(resp)
                     books_borrowed.value = resp
                 },
                 error(resp) {
