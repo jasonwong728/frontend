@@ -82,12 +82,12 @@ export default {
                 success(resp) {
                     console.log(resp)
                     getBorrowedBooks()
-                    new Toast(document.querySelector('#liveToast')).show()
                 },
                 error(resp) {
                     console.log(resp)
                 }
             })
+            new Toast(document.querySelector('#liveToast')).show()
         }
 
         const getBorrowedBooks = () => {
