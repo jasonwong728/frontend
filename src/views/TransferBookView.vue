@@ -81,7 +81,7 @@ export default {
 
         const getBorrowedBooks = () => {
             $.ajax({
-                url: "http://127.0.0.1:3000/library/book/getBorrowedBooks",
+                url: "http://127.0.0.1:3000/library/book/getBooksToChangeStatus",
                 type: "get",
                 success(resp) {
                     borrowed_books.value = resp
