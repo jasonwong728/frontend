@@ -24,24 +24,17 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav" v-if="$store.state.user.is_login === true">
-                    
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" >
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             你好，{{ $store.state.user.username }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <router-link class="dropdown-item" :to="{ name: 'user_info_view' }">我的资料</router-link>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                        <ul class="dropdown-menu" style="margin:0" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#" @click="logout">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <ul class="navbar-nav" v-if="$store.state.user.is_login === false">
+                <ul class="navbar-nav" style="margin-left:69vw" v-if="$store.state.user.is_login === false">
                     <router-link class="nav-link" :to="{ name: 'login_view' }">
                         登录
                     </router-link>
@@ -49,21 +42,22 @@
                         注册
                     </router-link>
                 </ul>
-
             </div>
         </div>
     </nav>
 </template>
 
 <script>
+import router from '@/router';
 import { useStore } from 'vuex';
 export default {
     setup() {
         const store = useStore();
+
         const logout = () => {
             store.dispatch("logout")
+            router.push({name: 'login_view'})
         }
-
         return {
             logout
         }

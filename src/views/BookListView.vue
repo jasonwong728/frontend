@@ -106,6 +106,42 @@
                                 </div>
                             </div>
                         </div>
+                        <button type="button" class="btn btn-warning" style="margin-right:10px" @click="showBorrow(book.isbn)" data-bs-toggle="modal" data-bs-target="#borrowed-book" v-if="$store.state.user.role === '管理'">查看借阅</button>
+                        <div class="modal fade" id="borrowed-book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">借阅记录</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>借阅时间</th>
+                                                    <th>ISBN</th>
+                                                    <th>借阅人学号</th>
+                                                    <th>归还时间</th>
+                                                    <th>归还地点</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="book in books_borrowed" :key="book.isbn">
+                                                    <td>{{ book.borrow_date }}</td>
+                                                    <td>{{ book.isbn }}</td>
+                                                    <td>{{ book.reader_id }}</td>
+                                                    <td>{{ book.return_date }}</td>
+                                                    <td>{{ book.status }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <button type="button" class="btn btn-primary" @click="bindData(book)" data-bs-toggle="modal" data-bs-target="#modify-book" v-if="$store.state.user.role === '管理'">修改</button>
                         <div class="modal fade" id="modify-book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -237,8 +273,8 @@ export default {
             // }
         ])
         let pages_show = ref([])
-        // const t = {"data":[{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":6,"price":10.0,"publisher":"少年文艺出版社","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"蔡志浩的桌艾日记","number":5,"price":11.0,"publisher":"嘉然解馋出版社","status":"南校"},{"author":"蔡志浩","category":"科幻","isbn":"105123154","name":"王欣蕊的星唉日记","number":0,"price":115.0,"publisher":"暨南大学出版社","status":"本部"},{"author":"莫言","category":"小说","isbn":"20000","name":"师傅越来越幽默","number":19,"price":104.0,"publisher":"人民出版社","status":"本部"}],"len":4}
-        // books_show.value = t.data
+        const t = {"data":[{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":6,"price":10.0,"publisher":"少年文艺出版社","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"蔡志浩的桌艾日记","number":5,"price":11.0,"publisher":"嘉然解馋出版社","status":"南校"},{"author":"蔡志浩","category":"科幻","isbn":"105123154","name":"王欣蕊的星唉日记","number":0,"price":115.0,"publisher":"暨南大学出版社","status":"本部"},{"author":"莫言","category":"小说","isbn":"20000","name":"师傅越来越幽默","number":19,"price":104.0,"publisher":"人民出版社","status":"本部"}],"len":4}
+        books_show.value = t.data
         const store = useStore()
 
         const borrow = ISBN => {
@@ -277,6 +313,26 @@ export default {
                 success(resp) {
                     console.log(resp)
                     pull_page(current_page)
+                },
+                error(resp) {
+                    console.log(resp)
+                }
+            })
+        }
+
+        const books_borrowed = ref([])
+        const showBorrow = isbn => {
+            $.ajax({
+                url: "http://127.0.0.1:3000/library/book/getBorrowedBooks",
+                type: "post",
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({
+                    isbn
+                }),
+                success(resp) {
+                    console.log(resp)
+                    books_borrowed.value = resp
                 },
                 error(resp) {
                     console.log(resp)
@@ -428,13 +484,15 @@ export default {
             status,
             books_show,
             pages_show,
+            books_borrowed,
             click_page,
             search,
             update_books,
             add_books,
             bindData,
             borrow,
-            transferBook
+            transferBook,
+            showBorrow
         }
     }
 }

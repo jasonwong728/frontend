@@ -5,12 +5,16 @@
 
 <script>
 import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.js"
+import 'jquery/dist/jquery.js'
+import "bootstrap/dist/js/bootstrap.min.js"
+import "bootstrap/dist/js/bootstrap.bundle.js"
 import NavBar from './components/NavBar.vue'
 
 export default {
   components: {
     NavBar
+  },
+  setup() {
   }
 }
 </script>
