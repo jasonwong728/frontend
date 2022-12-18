@@ -11,7 +11,7 @@ export default ({
     mutations: {
         updateUser(state, user) {
             state.id = user.id
-            state.username = user.username
+            state.username = user.name
             state.role = user.role
             state.is_login = true
         },

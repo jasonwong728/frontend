@@ -1,7 +1,7 @@
 <template>
     <ContentField>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#new-book"
-            v-if="$store.state.user.role === '管理员'">新书入库</button>
+            v-if="$store.state.user.role === '管理'">新书入库</button>
         <div class="modal fade" id="new-book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -95,7 +95,18 @@
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary" @click="borrow(book.isbn)" v-if="book.status === '本部' && $store.state.user.role === '学生'">借阅</button>
-                        <button type="button" class="btn btn-primary" @click="bindData(book)" data-bs-toggle="modal" data-bs-target="#modify-book" v-if="$store.state.user.role === '管理员'">修改</button>
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+                            <div id="liveToast-borrow" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto">图书馆</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    借阅成功
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" @click="bindData(book)" data-bs-toggle="modal" data-bs-target="#modify-book" v-if="$store.state.user.role === '管理'">修改</button>
                         <div class="modal fade" id="modify-book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
@@ -215,11 +226,12 @@ export default {
             // }
         ])
         let pages_show = ref([])
-        // const t = {"data":[{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":6,"price":10.0,"publisher":"少年文艺出版社","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"蔡志浩的桌艾日记","number":5,"price":11.0,"publisher":"嘉然解馋出版社","status":"南校"},{"author":"蔡志浩","category":"科幻","isbn":"105123154","name":"王欣蕊的星唉日记","number":0,"price":115.0,"publisher":"暨南大学出版社","status":"本部"},{"author":"莫言","category":"小说","isbn":"20000","name":"师傅越来越幽默","number":19,"price":104.0,"publisher":"人民出版社","status":"本部"}],"len":4}
-        // books_show.value = t.data
+        const t = {"data":[{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":6,"price":10.0,"publisher":"少年文艺出版社","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"蔡志浩的桌艾日记","number":5,"price":11.0,"publisher":"嘉然解馋出版社","status":"南校"},{"author":"蔡志浩","category":"科幻","isbn":"105123154","name":"王欣蕊的星唉日记","number":0,"price":115.0,"publisher":"暨南大学出版社","status":"本部"},{"author":"莫言","category":"小说","isbn":"20000","name":"师傅越来越幽默","number":19,"price":104.0,"publisher":"人民出版社","status":"本部"}],"len":4}
+        books_show.value = t.data
         const store = useStore()
 
         const borrow = ISBN => {
+            new Toast(document.querySelector('#liveToast-borrow')).show()
             const sid = store.state.user.id
             $.ajax({
                 url: "http://127.0.0.1:3000/library/book/borrow",
@@ -243,7 +255,7 @@ export default {
         const transferBook = ISBN => {
             new Toast(document.querySelector('.toast')).show()
             $.ajax({
-                url: "http://127.0.0.1:3000/library/book/changeBookStatus",
+                url: "http://127.0.0.1:3000/library/book/changeBookRequiredStatus",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
