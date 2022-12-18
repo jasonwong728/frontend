@@ -131,7 +131,7 @@
                                                     <td>{{ book.isbn }}</td>
                                                     <td>{{ book.reader_id }}</td>
                                                     <td>{{ book.return_date }}</td>
-                                                    <td>{{ book.status }}</td>
+                                                    <td>{{ book.return_status }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -322,8 +322,9 @@ export default {
 
         const process_time = data => {
             for(let i = 0;i < data.length;i ++) {
-                data[i].borrow_date = new Date(data[i].borrow_date)
-                data[i].return_date = new Date(data[i].return_date)
+                let t1 = new Date(data[i].borrow_date), t2 = new Date(data[i].return_date)
+                data[i].borrow_date = t1.toLocaleDateString().replace(/\//g, "-") + " " + t1.toTimeString().substr(0, 8)
+                data[i].return_date = t2.toLocaleDateString().replace(/\//g, "-") + " " + t2.toTimeString().substr(0, 8)
             }
         }
 
