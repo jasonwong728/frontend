@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="book in borrowed_books" :key="book.ISBN">
+                <tr v-for="book in borrowed_books" :key="book.isbn">
                     <td>{{ book.isbn }}</td>
                     <td>{{ book.category }}</td>
                     <td>{{ book.name }}</td>
@@ -57,6 +57,8 @@ export default {
     },
     setup() {
         let borrowed_books = ref([])
+        let t = [{"author":"鲁迅","category":"散文","isbn":"10000","name":"鲁迅杂文选","number":7,"price":10.0,"publisher":"少年文艺出版社","required_status":"去往_南校区","status":"珠海"},{"author":"王欣蕊","category":"哲学","isbn":"105123151","name":"原来不只有天才","number":5,"price":11.0,"publisher":"嘉然解馋出版社","required_status":"去往_南校区","status":"珠海"}]
+        borrowed_books.value = t
 
         const agreeOrNot = (ISBN, decision) => {
             $.ajax({
