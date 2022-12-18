@@ -291,7 +291,7 @@ export default {
                 }),
                 success(resp) {
                     console.log(resp)
-                    pull_page(current_page)
+                    pull_page(current_page - 1)
                 },
                 error(resp) {
                     console.log(resp)
@@ -312,7 +312,7 @@ export default {
                 }),
                 success(resp) {
                     console.log(resp)
-                    pull_page(current_page)
+                    pull_page(current_page - 1)
                 },
                 error(resp) {
                     console.log(resp)
@@ -385,13 +385,13 @@ export default {
                     status: status.value,
                 }),
                 success() {
-                    new Toast(document.querySelector('#liveToast-modify')).show()
-                    pull_page(current_page)
+                    pull_page(current_page - 1)
                 },
                 error(resp) {
                     console.log(resp)
                 }
             })
+            new Toast(document.querySelector('#liveToast-modify')).show()
         }
 
         const bindData = book => {
@@ -422,7 +422,7 @@ export default {
                     status: status.value,
                 }),
                 success() {
-                    pull_page(current_page)
+                    pull_page(current_page - 1)
                 },
                 error(resp) {
                     console.log(resp)

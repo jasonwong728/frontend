@@ -1,10 +1,10 @@
 import $ from 'jquery'
 export default ({
     state: {
-        id: "2019050610",
-        username: "饭好香",
-        role: "管理",
-        is_login : true
+        id: "",
+        username: "",
+        role: "",
+        is_login : false
     },
     getters: {
     },
