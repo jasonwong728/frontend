@@ -219,7 +219,7 @@ export default {
         const borrow = ISBN => {
             const sid = store.state.user.id
             $.ajax({
-                url: "http://127.0.0.1/library/book/borrow",
+                url: "http://127.0.0.1:3000/library/book/borrow",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
@@ -240,7 +240,7 @@ export default {
         const transferBook = ISBN => {
             new Toast(document.querySelector('.toast')).show()
             $.ajax({
-                url: "http://127.0.0.1/library/book/changeBookStatus",
+                url: "http://127.0.0.1:3000/library/book/changeBookStatus",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
@@ -260,7 +260,7 @@ export default {
 
         const search = () => {
             $.ajax({
-                url: "http://127.0.0.1/library/book/getBooksByInfo",
+                url: "http://127.0.0.1:3000/library/book/getBooksByInfo",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
@@ -279,7 +279,7 @@ export default {
 
         const update_books = () => {
             $.ajax({
-                url: "http://127.0.0.1/library/book/update",
+                url: "http://127.0.0.1:3000/library/book/update",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
@@ -315,7 +315,7 @@ export default {
 
         const add_books = () => {
             $.ajax({
-                url: "http://127.0.0.1/library/book/add",
+                url: "http://127.0.0.1:3000/library/book/add",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
@@ -367,7 +367,7 @@ export default {
         const pull_page = page => {
             current_page = page
             $.ajax({
-                url: "http://127.0.0.1/library/book/getBooks",
+                url: "http://127.0.0.1:3000/library/book/getBooks",
                 type: "post",
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8',
